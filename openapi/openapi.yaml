@@ -1,0 +1,100 @@
+components:
+  schemas:
+    EventMotive:
+      additionalProperties: false
+      properties:
+        eventType:
+          $ref: '#/components/schemas/MotivesCategory'
+        id:
+          format: int32
+          type: integer
+        name:
+          nullable: true
+          type: string
+      required:
+        - code
+        - eventType
+        - id
+        - name
+      type: object
+    ListMotivesResponse:
+      additionalProperties: false
+      properties:
+        message:
+          nullable: true
+          readOnly: true
+          type: string
+        model:
+          items:
+            $ref: '#/components/schemas/EventMotive'
+          nullable: true
+          readOnly: true
+          type: array
+      required:
+        - message
+        - model
+      type: object
+    MotivesCategory:
+      enum:
+        - CREATE_OPERATION
+        - LEAVE_OPERATION
+        - CANCEL_OPERATION
+      type: string
+    ErrorResponse:
+      additionalProperties: false
+      properties:
+        message:
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+        - message
+      type: object
+info:
+  title: MedicineOne API
+  version: v1
+openapi: 3.0.1
+paths:
+  /api/v1/operations.listEventMotives:
+    get:
+      parameters:
+        - description: Category of the motives
+          in: query
+          name: category
+          required: true
+          schema:
+            $ref: '#/components/schemas/MotivesCategory'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMotivesResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ListMotivesResponse'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ListMotivesResponse'
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Client Error
+      security:
+        - oauth2: []
+      summary: List the schedule motives acceptable for a operation
+      tags:
+        - operations
