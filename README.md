@@ -5,3 +5,5 @@ To run the generator, just run the Makefile in the terminal with the command:
 ```
 make
 ```
+
+This repo is a sample to the issue https://github.com/OpenAPITools/openapi-generator/issues/4593
