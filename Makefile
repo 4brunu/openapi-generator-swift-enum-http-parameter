@@ -8,7 +8,7 @@ generate-openapi:
 	rm -r -f openapi/docs/
 	
 	openapi-generator generate \
-		--input-spec openapi/openapi.yaml \
+		--input-spec openapi.yaml \
 		--generator-name swift4 \
-		--config openapi/openapi-config.json \
+		--config openapi-config.json \
 		--output openapi/ 
