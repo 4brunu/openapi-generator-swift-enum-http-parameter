@@ -38,6 +38,16 @@ open class OperationsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "category": category
         ])
+        
+        // the problem is in line 39
+        // category is of type MotivesCategory which is an enum, so the value that should be used is the rawValue
+        // otherwise, the value that will be used it's the name of the case, not the value of the case
+        // to fix the problem, the line 39 should be - "category": category.rawValue
+        
+        // let me show an example to explain the problem
+        // let categoryTemp = MotivesCategory.createOperation
+        // print(categoryTemp) // output: createOperation
+        // print(categoryTemp.rawValue) // output: CREATE_OPERATION which is the right value
 
         let requestBuilder: RequestBuilder<ListMotivesResponse>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 

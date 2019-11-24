@@ -32,7 +32,6 @@ Class | Method | HTTP request | Description
 
  - [EventMotive](docs/EventMotive.md)
  - [ListMotivesResponse](docs/ListMotivesResponse.md)
- - [ModelErrorResponse](docs/ModelErrorResponse.md)
  - [MotivesCategory](docs/MotivesCategory.md)
 
 
